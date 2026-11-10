@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Document Routing</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22%3E%3Cpath d=%22M8 1l7 7-7 7-7-7z%22 fill=%22%23444ce7%22/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/app.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">◆</span>
+      <h1>Document routing</h1>
+    </div>
+    <div class="topbar-meta">
+      <span id="rules-badge" class="badge">rules …</span>
+      <span class="muted mono" id="task-queue">task queue …</span>
+      <a id="temporal-ui" class="button ghost" target="_blank" rel="noopener">Temporal UI ↗</a>
+    </div>
+  </header>
+
+  <div id="banner" class="banner" hidden></div>
+
+  <main class="layout">
+    <section class="column">
+      <div class="card">
+        <h2>Submit a document</h2>
+        <p class="muted">Each click is a new document, and one Workflow per document.</p>
+        <div id="scenarios" class="chips"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h2>Routing rules</h2>
+          <span id="rules-card-version" class="badge">v…</span>
+        </div>
+        <p class="muted small">Cost above a unit's threshold goes to a person for review, starting with the unit's first assignee. Saving writes <code>data/rules.json</code>; the next evaluation uses it. Requests already routed keep their decision.</p>
+        <div id="thresholds" class="thresholds"></div>
+        <button id="save-rules" class="button" disabled>Save</button>
+        <div class="reset">
+          <button id="reset-data" class="button ghost">Reset demo data</button>
+          <span class="muted small">Rules back to v1, CC-99 removed, systems healthy.</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>External systems</h2>
+        <div id="systems-unreachable" class="warning" hidden>
+          Systems process unreachable. Every external system is down. Start <code>make systems</code>.
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="erp-down">
+          <span>ERP is <strong id="erp-state">up</strong></span>
+        </label>
+        <label class="toggle">
+          <input type="checkbox" id="supplier-rejects">
+          <span>Supplier portal <strong id="supplier-state">accepts</strong> purchase orders</span>
+        </label>
+        <p class="muted small">Budget reservations check cost centers against <code>data/reference-data.json</code>.</p>
+      </div>
+
+      <div class="card views-card">
+        <h2>Temporal UI views</h2>
+        <ul id="views" class="links"></ul>
+      </div>
+    </section>
+
+    <section class="column wide">
+      <div class="card">
+        <h2>Human tasks</h2>
+        <table class="table">
+          <thead><tr><th>Document</th><th>Assignee</th><th>Unit</th><th>Cost</th><th>Rules</th><th>SLA</th><th></th></tr></thead>
+          <tbody id="inbox"><tr><td colspan="7" class="muted">No open tasks.</td></tr></tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2>Recent requests</h2>
+        <table class="table">
+          <thead><tr><th>Document</th><th>Unit</th><th>Type</th><th>Cost</th><th>Path</th><th>Step</th><th>Status</th><th>Version</th></tr></thead>
+          <tbody id="recent"><tr><td colspan="8" class="muted">Nothing submitted yet.</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" hidden></div>
+  <script src="/app.js"></script>
+</body>
+</html>

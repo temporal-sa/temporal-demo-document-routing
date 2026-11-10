@@ -1,0 +1,122 @@
+:root {
+  --bg: #f6f7fb;
+  --surface: #ffffff;
+  --text: #141824;
+  --muted: #5d6475;
+  --border: #e2e5ee;
+  --accent: #444ce7;
+  --accent-text: #ffffff;
+  --ok: #0f7b45;
+  --ok-bg: #e3f6ec;
+  --warn: #8a5300;
+  --warn-bg: #fff2d6;
+  --danger: #b42318;
+  --danger-bg: #fde7e5;
+  --shadow: 0 1px 2px rgba(16, 24, 40, 0.06);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d1017;
+    --surface: #161a24;
+    --text: #e8eaf1;
+    --muted: #9aa1b2;
+    --border: #2a3040;
+    --accent: #7c83ff;
+    --accent-text: #0d1017;
+    --ok: #4ade80;
+    --ok-bg: #12331f;
+    --warn: #fbbf24;
+    --warn-bg: #3a2a07;
+    --danger: #f87171;
+    --danger-bg: #3a1414;
+    --shadow: none;
+  }
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.45; }
+h1 { font-size: 18px; margin: 0; }
+h2 { font-size: 15px; margin: 0 0 8px; }
+a { color: var(--accent); }
+code, .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
+.muted { color: var(--muted); }
+.small { font-size: 12px; }
+
+.topbar {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  padding: 12px 24px; background: var(--surface); border-bottom: 1px solid var(--border);
+}
+.brand { display: flex; align-items: center; gap: 10px; }
+.logo { color: var(--accent); font-size: 20px; }
+.topbar-meta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+.banner { background: var(--warn-bg); color: var(--warn); padding: 8px 24px; border-bottom: 1px solid var(--border); }
+
+.layout { display: grid; grid-template-columns: minmax(280px, 1fr) minmax(0, 2.2fr); gap: 16px; padding: 16px 24px; }
+.column { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+/* Single column on narrow screens: flatten both columns into one stack so the
+   Temporal UI views card can sit below the tables instead of above them. */
+@media (max-width: 900px) {
+  .layout { display: flex; flex-direction: column; padding: 16px; }
+  .column { display: contents; }
+  .views-card { order: 1; }
+}
+
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; box-shadow: var(--shadow); overflow-x: auto; }
+.card-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+
+.chips { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+.chip {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left;
+  border: 1px solid var(--border); background: var(--bg); color: var(--text);
+  border-radius: 8px; padding: 8px 12px; cursor: pointer; font: inherit;
+}
+.chip:hover { border-color: var(--accent); }
+.chip.secondary { border-style: dashed; }
+.chip-label { font-weight: 600; }
+.chip-hint { font-size: 12px; color: var(--muted); }
+
+.button {
+  border: 1px solid var(--accent); background: var(--accent); color: var(--accent-text);
+  border-radius: 6px; padding: 6px 12px; font: inherit; cursor: pointer; text-decoration: none; white-space: nowrap;
+}
+.button.ghost { background: transparent; color: var(--accent); }
+.button.small { padding: 3px 8px; font-size: 12px; }
+.button:disabled { opacity: 0.5; cursor: default; }
+
+.badge { border: 1px solid var(--border); border-radius: 999px; padding: 2px 10px; font-size: 12px; }
+.badge.warn { background: var(--warn-bg); color: var(--warn); border-color: transparent; }
+
+.toggle { display: flex; align-items: center; gap: 8px; padding: 6px 0; cursor: pointer; }
+.warning { background: var(--danger-bg); color: var(--danger); border-radius: 6px; padding: 8px 10px; margin-bottom: 8px; }
+
+.links { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.links li { display: flex; flex-direction: column; }
+
+.table { width: 100%; border-collapse: collapse; }
+.table th { text-align: left; font-size: 12px; color: var(--muted); font-weight: 600; padding: 6px 8px; border-bottom: 1px solid var(--border); }
+.table td { padding: 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.table tr.breached td { background: var(--danger-bg); }
+.actions { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.comment { width: 140px; padding: 3px 6px; border: 1px solid var(--border); border-radius: 4px; background: var(--bg); color: var(--text); font: inherit; font-size: 12px; }
+.actions .assignee { padding: 3px 6px; border: 1px solid var(--border); border-radius: 4px; background: var(--bg); color: var(--text); font: inherit; }
+
+.pill { display: inline-block; border-radius: 999px; padding: 1px 8px; font-size: 12px; background: var(--bg); border: 1px solid var(--border); white-space: nowrap; }
+.pill.ok { background: var(--ok-bg); color: var(--ok); border-color: transparent; }
+.pill.warn { background: var(--warn-bg); color: var(--warn); border-color: transparent; }
+.pill.danger { background: var(--danger-bg); color: var(--danger); border-color: transparent; }
+
+.toast {
+  position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); max-width: min(90vw, 560px);
+  padding: 10px 16px; border-radius: 8px; background: var(--text); color: var(--bg); box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+.toast.warn { background: var(--warn-bg); color: var(--warn); }
+.toast.error { background: var(--danger-bg); color: var(--danger); }
+
+.thresholds { display: grid; grid-template-columns: minmax(6.5em, max-content) minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: 6px 8px; margin: 8px 0 10px; }
+.thresholds input { padding: 4px 6px; border: 1px solid var(--border); border-radius: 4px; background: var(--bg); color: var(--text); font: inherit; width: 100%; min-width: 0; box-sizing: border-box; }
+.thresholds input[data-dirty] { border-color: var(--accent); }
+.reset { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); }

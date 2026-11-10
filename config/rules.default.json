@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "businessUnits": {
+    "Services": {
+      "humanReviewAbove": 5000,
+      "firstAssignee": "Alice"
+    },
+    "Equipment": {
+      "humanReviewAbove": 1000,
+      "firstAssignee": "Bob"
+    }
+  }
+}
